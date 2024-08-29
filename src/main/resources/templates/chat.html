@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Chat Assistant</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        .chat-box {
+            border: 1px solid #ccc;
+            padding: 10px;
+            width: 50%;
+            margin: 0 auto;
+        }
+        .message {
+            margin: 10px 0;
+        }
+        .user-message {
+            color: blue;
+        }
+        .bot-response {
+            color: green;
+        }
+        .input-box {
+            margin-top: 20px;
+
+        }
+    </style>
+</head>
+<body>
+<div class="chat-box">
+    <h2>Chat Assistant</h2>
+
+    <div th:each="chatMessage : ${chatHistory}">
+        <div class="message user-message">
+            <strong>You:</strong> <span th:text="${chatMessage.userMessage}"></span>
+        </div>
+        <div class="message bot-response">
+            <strong>Bot:</strong> <span th:text="${chatMessage.botResponse}"></span>
+        </div>
+    </div>
+
+    <form action="/send" method="post" class="input-box">
+        <input type="text" name="message" size="30" placeholder="Type your message here..." required>
+        <button type="submit">Send</button>
+    </form>
+</div>
+</body>
+</html>
